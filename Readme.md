@@ -37,12 +37,10 @@ table.include.list
 curl -i -X POST -H "Accept:application/json" -H  "Content-Type:application/json" http://localhost:8083/connectors/ -d @connector.json
 ```
 
-
-
-# Para limpar o ambiente docker
-```
-docker-compose down
-```
+### Observações:
+- O Debezium irá criar um slot de replicação dentro do postgres chamado "debezium", mas você pode configurar através do parametro "slot.name" do conector.
+- Serão gerados 3 hubs/topicos dentro do Event Hubs respectivamente chamados de postgres-dev-configs, postgres-dev-offsets e postgres-dev-status. Eles podem ser configurados dentro do docker-compose alterando as váriaveis: CONFIG_STORAGE_TOPIC, OFFSET_STORAGE_TOPIC, STATUS_STORAGE_TOPIC.
+- Esses topicos serão usados pelo Debezium para controlar o estado dos conectores cadastrados e o ponto em que a leitura foi realizada até o momento: offset.
 
 ### Para conferir o slots de replicação que o Debezium irá criar dentro do postgres:
 ```
@@ -58,6 +56,10 @@ select pg_drop_replication_slot('debezium');
 http://localhost:8083/connectors/postgres-connector
 http://localhost:8083/connectors/postgres-connector/status
 
+# Para limpar o ambiente docker
+```
+docker-compose down
+```
 
 # Referências
 https://debezium.io/documentation/reference/connectors/postgresql.html
