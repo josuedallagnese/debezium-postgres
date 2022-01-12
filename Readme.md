@@ -30,13 +30,17 @@ Após isso crie o conector via curl ou como preferir:
 ```
 - Substituir os parametros antes de criar o conector:
 
-database.hostname
-database.user
-database.password
-table.include.list
+database.hostname: nome do host
+database.user: nome do usuário
+database.password: senha
+table.include.list: lista de tabela que serão lidas pelo debezium, separados por virgula.
 
 curl -i -X POST -H "Accept:application/json" -H  "Content-Type:application/json" http://localhost:8083/connectors/ -d @connector.json
 ```
+
+- Após criar o conector será criado um Hub para cada tabela adicionada dentro do parametro "table.include.list" concatenando ao nome definido no parametro "database.server.name".  
+Exemplo "table.include.list": "public.Table1, public.Table2": irá gerar 2 topicos chamados postgres.public.table1 e postgres.public.table2  
+Ferramenta visual para exibição dos valores dos tópicos: https://www.conduktor.io/
 
 ### Observações:
 - O Debezium irá criar um slot de replicação dentro do postgres chamado "debezium", mas você pode configurar através do parametro "slot.name" do conector.
