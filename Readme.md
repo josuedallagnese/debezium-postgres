@@ -12,6 +12,7 @@ DEBEZIUM_VERSION=1.8
 EH_NAME=eventhub-dev
 EH_CONNECTION_STRING=Endpoint=sb://eventhub-dev.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=XXX
 ```
+Ou então passe os valores ao executar o docker-compose
 
 2) Suba o compose
 ```
