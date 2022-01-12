@@ -18,12 +18,13 @@ EH_CONNECTION_STRING=Endpoint=sb://eventhub-dev.servicebus.windows.net/;SharedAc
 docker-compose up
 ```
 
-3) Acesse a API do debezium/conector e cadastre o conector para o banco PostgreSQL. No meu caso estou utilizando o Azure Database for PostgreSQL server.
-Confirme que o banco está com a configuração de replicação logica habitadada.
-Maiores detalhes em: https://debezium.io/documentation/reference/connectors/postgresql.html
-No Azure PostgreSQL essa opção se encontra na aba "Replication" da sua instância, opção "LOGICAL".
+3) Cadastre o conector via API
+- Neste caso estou utilizando o Azure Database for PostgreSQL server.
+- Confirme a configuração do banco se esta com a replicação logica habitadada.
+- Detalhes: https://debezium.io/documentation/reference/connectors/postgresql.html.
+- No Azure PostgreSQL essa opção se encontra na aba "Replication" da sua instância: opção "LOGICAL".
 
-Após isso crie o conector via API com os valores que você deseja:
+Após isso crie o conector via curl ou como preferir:
 
 ```
 - Substituir os parametros antes de criar o conector:
@@ -59,6 +60,7 @@ http://localhost:8083/connectors/postgres-connector/status
 
 
 # Referências
+https://debezium.io/documentation/reference/connectors/postgresql.html
 https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-kafka-connect-tutorial
 https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/tutorials/connect
 https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-kafka-connect-debezium
